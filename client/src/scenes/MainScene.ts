@@ -196,11 +196,24 @@ export class MainScene extends ex.Scene {
     this.hud.updateWave(gameState.wave);
     this.hud.updateTimeUntilNextWave(gameState.timeUntilNextWave);
     
-    // Aktualizacja wszystkich obiektów
-    gameState.players.forEach((playerData) => this.updatePlayer(playerData));
-    gameState.zombies.forEach((zombieData) => this.updateZombie(zombieData));
-    gameState.buildings.forEach((buildingData) => this.updateBuilding(buildingData));
-    gameState.resources.forEach((resourceData) => this.updateResource(resourceData));
+    // Socket.IO serializuje Mapy do zwykłych obiektów; obsłuż obie formy
+    const playersIterable: Iterable<PlayerData> = (gameState.players instanceof Map)
+      ? gameState.players.values()
+      : Object.values(gameState.players as any);
+    const zombiesIterable: Iterable<ZombieData> = (gameState.zombies instanceof Map)
+      ? gameState.zombies.values()
+      : Object.values(gameState.zombies as any);
+    const buildingsIterable: Iterable<BuildingData> = (gameState.buildings instanceof Map)
+      ? gameState.buildings.values()
+      : Object.values(gameState.buildings as any);
+    const resourcesIterable: Iterable<ResourceData> = (gameState.resources instanceof Map)
+      ? gameState.resources.values()
+      : Object.values(gameState.resources as any);
+
+    for (const playerData of playersIterable) this.updatePlayer(playerData);
+    for (const zombieData of zombiesIterable) this.updateZombie(zombieData);
+    for (const buildingData of buildingsIterable) this.updateBuilding(buildingData);
+    for (const resourceData of resourcesIterable) this.updateResource(resourceData);
   }
 
   private updatePlayer(playerData: PlayerData): void {

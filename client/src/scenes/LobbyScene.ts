@@ -111,6 +111,8 @@ export class LobbyScene extends ex.Scene {
       console.log('Przycisk DOŁĄCZ kliknięty');
       // Emituj bezpośrednio joinGame z nazwą
       this.multiplayerManager.emit('joinGame', { playerName: this.playerName });
+      // Od razu przejdź do sceny głównej; serwer i tak wyśle stan oraz playerId
+      this.engine.goToScene('main');
     });
     
     // Nasłuchiwanie na aktualizacje listy graczy
