@@ -58,8 +58,9 @@ io.on('connection', (socket) => {
     // Powiadomienie innych graczy o nowym graczu
     socket.to(gameRoom.getId()).emit('playersListUpdate', gameRoom.getPlayersList());
     
-    // Jeśli pokój jest pełny, rozpoczęcie gry
-    if (gameRoom.isFull()) {
+    // Rozpoczęcie gry po dołączeniu minimalnej liczby graczy (tu: 1)
+    // Używamy długości listy graczy, by nie dodawać nowych metod do GameRoom
+    if (!gameRoom.isGameStarted() && gameRoom.getPlayersList().length >= 1) {
       gameRoom.startGame();
       io.to(gameRoom.getId()).emit('gameStart');
     }
