@@ -297,8 +297,7 @@ export class MainScene extends ex.Scene {
   }
 
   public onActivate(): void {
-    // Wysłanie żądania dołączenia do gry
-    this.multiplayerManager.emit('joinGame');
+    // Nic nie wysyłamy: dołączenie następuje w Lobby po kliknięciu
   }
 
   public onDeactivate(): void {

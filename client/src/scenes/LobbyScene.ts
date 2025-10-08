@@ -109,7 +109,8 @@ export class LobbyScene extends ex.Scene {
     // Obsługa kliknięcia przycisku dołączenia
     this.joinButton.on('pointerdown', () => {
       console.log('Przycisk DOŁĄCZ kliknięty');
-      this.joinGame(this.playerName);
+      // Emituj bezpośrednio joinGame z nazwą
+      this.multiplayerManager.emit('joinGame', { playerName: this.playerName });
     });
     
     // Nasłuchiwanie na aktualizacje listy graczy
@@ -173,8 +174,8 @@ export class LobbyScene extends ex.Scene {
   }
 
   private joinGame(playerName: string): void {
-    // Wysłanie żądania dołączenia do gry
-    this.multiplayerManager.emit('joinLobby', { playerName });
+    // Zachowano dla kompatybilności; teraz używamy 'joinGame'
+    this.multiplayerManager.emit('joinGame', { playerName });
   }
 
   private updatePlayersList(players: string[]): void {
