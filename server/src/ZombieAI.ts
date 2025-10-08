@@ -10,34 +10,34 @@ export class ZombieAI {
     buildings: Map<string, BuildingData>
   ): string | null {
     // Znalezienie najbliższego gracza
-    let nearestPlayer: PlayerData | null = null;
+    let nearestPlayerId: string | null = null;
     let nearestPlayerDistance = Infinity;
     
     players.forEach((player) => {
       const distance = this.calculateDistance(zombie.position, player.position);
       if (distance < nearestPlayerDistance) {
         nearestPlayerDistance = distance;
-        nearestPlayer = player;
+        nearestPlayerId = player.id;
       }
     });
     
     // Znalezienie najbliższej budowli
-    let nearestBuilding: BuildingData | null = null;
+    let nearestBuildingId: string | null = null;
     let nearestBuildingDistance = Infinity;
     
     buildings.forEach((building) => {
       const distance = this.calculateDistance(zombie.position, building.position);
       if (distance < nearestBuildingDistance) {
         nearestBuildingDistance = distance;
-        nearestBuilding = building;
+        nearestBuildingId = building.id;
       }
     });
     
     // Wybór celu (gracz lub budynek)
-    if (nearestPlayer && nearestPlayerDistance < 500) { // Zasięg widzenia graczy
-      return nearestPlayer.id;
-    } else if (nearestBuilding && nearestBuildingDistance < 300) { // Zasięg widzenia budynków
-      return nearestBuilding.id;
+    if (nearestPlayerId && nearestPlayerDistance < 500) { // Zasięg widzenia graczy
+      return nearestPlayerId;
+    } else if (nearestBuildingId && nearestBuildingDistance < 300) { // Zasięg widzenia budynków
+      return nearestBuildingId;
     }
     
     return null;
