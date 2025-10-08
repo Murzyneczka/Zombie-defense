@@ -124,39 +124,22 @@ export class LobbyScene extends ex.Scene {
     
     // Obsługa klawiatury do zmiany nazwy gracza
     this.engine.input.keyboard.on('press', (evt) => {
-      console.log('Klawisz naciśnięty:', evt.key);
-      
-      // Obsługa liter
-      if (evt.key >= ex.Input.Keys.A && evt.key <= ex.Input.Keys.Z) {
-        const char = ex.Input.Keys[evt.key]; // Pobierz nazwę klawisza (np. "A", "B", etc.)
+      const keyName = ex.Input.Keys[evt.key]; // np. "KeyW", "Digit1", "Space"
+      console.log('Klawisz naciśnięty:', keyName);
+
+      const mappedChar = this.mapKeyNameToChar(keyName);
+      if (mappedChar !== null) {
         if (this.playerName === 'Gracz') {
-          this.playerName = char;
+          this.playerName = mappedChar;
         } else if (this.playerName.length < 15) {
-          this.playerName += char;
+          this.playerName += mappedChar;
         }
         this.nameLabel.text = `Nazwa: ${this.playerName}`;
-      } 
-      // Obsługa cyfr
-      else if (evt.key >= ex.Input.Keys.Num0 && evt.key <= ex.Input.Keys.Num9) {
-        const num = ex.Input.Keys[evt.key].replace('Num', '');
-        if (this.playerName === 'Gracz') {
-          this.playerName = num;
-        } else if (this.playerName.length < 15) {
-          this.playerName += num;
-        }
-        this.nameLabel.text = `Nazwa: ${this.playerName}`;
+        return;
       }
-      // Obsługa spacji
-      else if (evt.key === ex.Input.Keys.Space) {
-        if (this.playerName === 'Gracz') {
-          this.playerName = ' ';
-        } else if (this.playerName.length < 15) {
-          this.playerName += ' ';
-        }
-        this.nameLabel.text = `Nazwa: ${this.playerName}`;
-      }
+
       // Obsługa Backspace
-      else if (evt.key === ex.Input.Keys.Backspace && this.playerName.length > 0) {
+      if (evt.key === ex.Input.Keys.Backspace && this.playerName.length > 0) {
         this.playerName = this.playerName.slice(0, -1);
         if (this.playerName.length === 0) {
           this.playerName = 'Gracz';
@@ -164,6 +147,29 @@ export class LobbyScene extends ex.Scene {
         this.nameLabel.text = `Nazwa: ${this.playerName}`;
       }
     });
+  }
+
+  private mapKeyNameToChar(keyName: string): string | null {
+    // Przekształca nazwy klawiszy Excalibur/DOM na pojedynczy znak
+    // Przykłady: "KeyW" -> "W", "Digit3" -> "3", "Num7" -> "7", "Space" -> " "
+    if (!keyName) return null;
+
+    if (/^Key[A-Z]$/.test(keyName)) {
+      return keyName.slice(3);
+    }
+    if (/^[A-Z]$/.test(keyName)) {
+      return keyName;
+    }
+    if (/^Digit[0-9]$/.test(keyName)) {
+      return keyName.slice(5);
+    }
+    if (/^Num[0-9]$/.test(keyName)) {
+      return keyName.slice(3);
+    }
+    if (keyName === 'Space') {
+      return ' ';
+    }
+    return null;
   }
 
   private joinGame(playerName: string): void {
