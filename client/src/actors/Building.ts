@@ -18,7 +18,7 @@ export class Building extends ex.Actor {
       width: 32,
       height: 32,
       collisionType: ex.CollisionType.Fixed,
-      color: ex.Color.Brown
+      color: ex.Color.fromHex('#8B4513')
     });
     
     this.data = data;
@@ -34,7 +34,7 @@ export class Building extends ex.Actor {
       color: ex.Color.Red
     });
     
-    this.addChild(this.healthBar);
+    // Health bar will be rendered using graphics in onPostDraw
     
     // Dodanie sprite'a budynku
     const buildingSprite = new ex.Sprite({
@@ -139,7 +139,9 @@ export class Building extends ex.Actor {
     if (now - this.lastShotTime < this.shootCooldown) return;
     
     // Znalezienie najbliższego zombie w zasięgu
-    const zombies = this.scene['zombies'] as Map<string, any>;
+    const mainScene = this.scene as any;
+    const zombies = mainScene.zombies as Map<string, any>;
+    if (!zombies) return;
     let nearestZombie: any = null;
     let nearestDistance = this.range;
     
@@ -181,11 +183,14 @@ export class Building extends ex.Actor {
     this.resourceManager.playSound('shoot');
     
     // Wysłanie informacji o strzale do serwera
-    this.scene['multiplayerManager'].emit('turretShoot', {
+    const mainScene = this.scene as any;
+    if (mainScene.multiplayerManager) {
+      mainScene.multiplayerManager.emit('turretShoot', {
       buildingId: this.data.id,
       position: { x: this.pos.x, y: this.pos.y },
       direction: { x: direction.x, y: direction.y }
-    });
+      });
+    }
   }
 
   public takeDamage(amount: number): void {
@@ -219,9 +224,12 @@ export class Building extends ex.Actor {
 
   private destroy(): void {
     // Wysłanie informacji o zniszczeniu budynku do serwera
-    this.scene['multiplayerManager'].emit('buildingDestroyed', {
+    const mainScene = this.scene as any;
+    if (mainScene.multiplayerManager) {
+      mainScene.multiplayerManager.emit('buildingDestroyed', {
       buildingId: this.data.id
-    });
+      });
+    }
     
     // Usunięcie budynku z gry
     this.kill();

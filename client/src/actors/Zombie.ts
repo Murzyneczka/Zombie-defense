@@ -6,8 +6,8 @@ import { Player } from './Player';
 export class Zombie extends ex.Actor {
   private data: ZombieData;
   private resourceManager: ResourceManager;
-  private speed: number;
-  private damage: number;
+  private speed: number = 50;
+  private damage: number = 10;
   private attackCooldown = 1000; // ms
   private lastAttackTime = 0;
   private healthBar: ex.Rectangle;
@@ -34,7 +34,7 @@ export class Zombie extends ex.Actor {
       color: ex.Color.Red
     });
     
-    this.addChild(this.healthBar);
+    // Health bar will be rendered using graphics
     
     // Dodanie sprite'a zombie
     const zombieSprite = new ex.Sprite({
@@ -105,15 +105,16 @@ export class Zombie extends ex.Actor {
     let targetActor: ex.Actor | null = null;
     
     // Sprawdzenie graczy
-    const players = this.scene['players'] as Map<string, any>;
-    if (players.has(this.data.target)) {
+    const mainScene = this.scene as any;
+    const players = mainScene.players as Map<string, any>;
+    if (players && this.data.target && players.has(this.data.target)) {
       targetActor = players.get(this.data.target);
     }
     
     // Sprawdzenie budynków
     if (!targetActor) {
-      const buildings = this.scene['buildings'] as Map<string, any>;
-      if (buildings.has(this.data.target)) {
+      const buildings = mainScene.buildings as Map<string, any>;
+      if (buildings && this.data.target && buildings.has(this.data.target)) {
         targetActor = buildings.get(this.data.target);
       }
     }
@@ -143,11 +144,14 @@ export class Zombie extends ex.Actor {
     this.resourceManager.playSound('zombie_growl');
     
     // Wysłanie informacji o ataku do serwera
-    this.scene['multiplayerManager'].emit('zombieAttack', {
+    const mainScene = this.scene as any;
+    if (mainScene.multiplayerManager) {
+      mainScene.multiplayerManager.emit('zombieAttack', {
       zombieId: this.data.id,
       targetId: target.getData().id,
       damage: this.damage
-    });
+      });
+    }
   }
 
   public takeDamage(amount: number): void {
@@ -178,9 +182,12 @@ export class Zombie extends ex.Actor {
 
   private die(): void {
     // Wysłanie informacji o śmierci zombie do serwera
-    this.scene['multiplayerManager'].emit('zombieDied', {
+    const mainScene = this.scene as any;
+    if (mainScene.multiplayerManager) {
+      mainScene.multiplayerManager.emit('zombieDied', {
       zombieId: this.data.id
-    });
+      });
+    }
     
     // Usunięcie zombie z gry
     this.kill();

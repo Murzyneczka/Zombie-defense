@@ -4,11 +4,11 @@ import { MultiplayerManager } from '../managers/MultiplayerManager';
 export class LobbyScene extends ex.Scene {
   private multiplayerManager: MultiplayerManager;
   private playerName: string = 'Gracz';
-  private joinButton: ex.Actor;
-  private playersList: ex.Label;
-  private titleLabel: ex.Label;
-  private background: ex.Rectangle;
-  private nameLabel: ex.Label;
+  private joinButton!: ex.Actor;
+  private playersList!: ex.Label;
+  private titleLabel!: ex.Label;
+  private background!: ex.Rectangle;
+  private nameLabel!: ex.Label;
 
   constructor(multiplayerManager: MultiplayerManager) {
     super();
@@ -16,14 +16,23 @@ export class LobbyScene extends ex.Scene {
   }
 
   public onInitialize(engine: ex.Engine): void {
-    // Tło
-    this.background = new ex.Rectangle({
+    // Create background using a rectangle graphic
+    const bgRect = new ex.Rectangle({
       width: engine.drawWidth,
       height: engine.drawHeight,
       color: ex.Color.fromHex('#1a1a1a')
     });
     
-    this.add(this.background);
+    // Create an actor for the background
+    this.background = bgRect;
+    const bgActor = new ex.Actor({
+      pos: ex.vec(0, 0),
+      width: engine.drawWidth,
+      height: engine.drawHeight,
+      anchor: ex.vec(0, 0)
+    });
+    bgActor.graphics.use(bgRect);
+    this.add(bgActor);
     
     // Tytuł
     this.titleLabel = new ex.Label({
@@ -111,13 +120,17 @@ export class LobbyScene extends ex.Scene {
     
     // Obsługa klawiatury do zmiany nazwy gracza (opcjonalnie)
     this.engine.input.keyboard.on('press', (evt) => {
-      if (evt.key >= ex.Input.Keys.A && evt.key <= ex.Input.Keys.Z) {
-        if (this.playerName === 'Gracz') {
-          this.playerName = String.fromCharCode(evt.key);
-        } else if (this.playerName.length < 15) {
-          this.playerName += String.fromCharCode(evt.key);
+      // Handle letter keys for name input
+      if (evt.key && typeof evt.key === 'string' && evt.key.length === 1) {
+        const char = evt.key.toUpperCase();
+        if (char >= 'A' && char <= 'Z') {
+          if (this.playerName === 'Gracz') {
+            this.playerName = char;
+          } else if (this.playerName.length < 15) {
+            this.playerName += char;
+          }
+          this.nameLabel.text = `Nazwa: ${this.playerName}`;
         }
-        this.nameLabel.text = `Nazwa: ${this.playerName}`;
       } else if (evt.key === ex.Input.Keys.Backspace && this.playerName.length > 0) {
         this.playerName = this.playerName.slice(0, -1);
         if (this.playerName.length === 0) {

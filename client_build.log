@@ -1,0 +1,576 @@
+npm warn Unknown builtin config "globalignorefile". This will stop working in the next major version of npm.
+
+> zombie-defense-client@1.0.0 build
+> webpack --mode production
+
+assets by status 475 KiB [cached] 30 assets
+orphan modules 1.23 MiB [orphan] 43 modules
+runtime modules 670 bytes 3 modules
+./src/index.ts + 43 modules 1.23 MiB [built] [code generated]
+
+ERROR in /home/Zombie-defense/client/src/index.ts
+23:22-72
+[tsl] ERROR in /home/Zombie-defense/client/src/index.ts(23,23)
+      TS2345: Argument of type 'MainScene' is not assignable to parameter of type 'Scene<unknown>'.
+  Property 'camera' is private in type 'MainScene' but not in type 'Scene<unknown>'.
+
+ERROR in /home/Zombie-defense/client/src/actors/Building.ts
+./src/actors/Building.ts 21:22-27
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Building.ts(21,23)
+      TS2339: Property 'Brown' does not exist on type 'typeof Color'.
+ @ ./src/scenes/MainScene.ts 4:0-46 201:27-35
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Building.ts
+./src/actors/Building.ts 37:18-32
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Building.ts(37,19)
+      TS2345: Argument of type 'Rectangle' is not assignable to parameter of type 'Entity'.
+  Type 'Rectangle' is missing the following properties from type 'Entity': _name, _setName, name, events, and 52 more.
+ @ ./src/scenes/MainScene.ts 4:0-46 201:27-35
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Building.ts
+./src/actors/Building.ts 142:20-41
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Building.ts(142,21)
+      TS7053: Element implicitly has an 'any' type because expression of type '"zombies"' can't be used to index type 'Scene<unknown>'.
+  Property 'zombies' does not exist on type 'Scene<unknown>'.
+ @ ./src/scenes/MainScene.ts 4:0-46 201:27-35
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Building.ts
+./src/actors/Building.ts 184:4-36
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Building.ts(184,5)
+      TS7053: Element implicitly has an 'any' type because expression of type '"multiplayerManager"' can't be used to index type 'Scene<unknown>'.
+  Property 'multiplayerManager' does not exist on type 'Scene<unknown>'.
+ @ ./src/scenes/MainScene.ts 4:0-46 201:27-35
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Building.ts
+./src/actors/Building.ts 222:4-36
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Building.ts(222,5)
+      TS7053: Element implicitly has an 'any' type because expression of type '"multiplayerManager"' can't be used to index type 'Scene<unknown>'.
+  Property 'multiplayerManager' does not exist on type 'Scene<unknown>'.
+ @ ./src/scenes/MainScene.ts 4:0-46 201:27-35
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Player.ts
+./src/actors/Player.ts 2:53-76
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Player.ts(2,54)
+      TS6059: File '/home/Zombie-defense/shared/types.ts' is not under 'rootDir' '/home/Zombie-defense/client/src'. 'rootDir' is expected to contain all source files.
+  The file is in the program because:
+    Imported via '../../../shared/types' from file '/home/Zombie-defense/client/src/actors/Player.ts'
+    Imported via '../../../shared/types' from file '/home/Zombie-defense/client/src/actors/Zombie.ts'
+    Imported via '../../../shared/types' from file '/home/Zombie-defense/client/src/actors/Building.ts'
+    Imported via '../../../shared/types' from file '/home/Zombie-defense/client/src/actors/Resource.ts'
+    Imported via '../../../shared/types' from file '/home/Zombie-defense/client/src/ui/HUD.ts'
+    Imported via '../../../shared/types' from file '/home/Zombie-defense/client/src/ui/BuildMenu.ts'
+    Imported via '../../../shared/types' from file '/home/Zombie-defense/client/src/managers/MultiplayerManager.ts'
+    Imported via '../../../shared/types' from file '/home/Zombie-defense/client/src/scenes/MainScene.ts'
+    Imported via '../../../shared/types' from file '/home/Zombie-defense/client/src/scenes/ShopScene.ts'
+    Root file specified for compilation
+ @ ./src/scenes/MainScene.ts 2:0-42 171:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Player.ts
+./src/actors/Player.ts 58:18-32
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Player.ts(58,19)
+      TS2345: Argument of type 'Rectangle' is not assignable to parameter of type 'Entity'.
+  Type 'Rectangle' is missing the following properties from type 'Entity': _name, _setName, name, events, and 52 more.
+ @ ./src/scenes/MainScene.ts 2:0-42 171:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Player.ts
+./src/actors/Player.ts 59:18-33
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Player.ts(59,19)
+      TS2345: Argument of type 'Rectangle' is not assignable to parameter of type 'Entity'.
+  Type 'Rectangle' is missing the following properties from type 'Entity': _name, _setName, name, events, and 52 more.
+ @ ./src/scenes/MainScene.ts 2:0-42 171:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Player.ts
+./src/actors/Player.ts 140:34-41
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Player.ts(140,35)
+      TS2551: Property 'pointer' does not exist on type 'EngineInput'. Did you mean 'pointers'?
+ @ ./src/scenes/MainScene.ts 2:0-42 171:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Player.ts
+./src/actors/Player.ts 141:39-58
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Player.ts(141,40)
+      TS2339: Property 'screenToWorldCoords' does not exist on type 'Camera'.
+ @ ./src/scenes/MainScene.ts 2:0-42 171:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Player.ts
+./src/actors/Player.ts 148:21-28
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Player.ts(148,22)
+      TS2551: Property 'pointer' does not exist on type 'EngineInput'. Did you mean 'pointers'?
+ @ ./src/scenes/MainScene.ts 2:0-42 171:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Player.ts
+./src/actors/Player.ts 192:4-36
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Player.ts(192,5)
+      TS7053: Element implicitly has an 'any' type because expression of type '"multiplayerManager"' can't be used to index type 'Scene<unknown>'.
+  Property 'multiplayerManager' does not exist on type 'Scene<unknown>'.
+ @ ./src/scenes/MainScene.ts 2:0-42 171:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Player.ts
+./src/actors/Player.ts 221:4-36
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Player.ts(221,5)
+      TS7053: Element implicitly has an 'any' type because expression of type '"multiplayerManager"' can't be used to index type 'Scene<unknown>'.
+  Property 'multiplayerManager' does not exist on type 'Scene<unknown>'.
+ @ ./src/scenes/MainScene.ts 2:0-42 171:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Player.ts
+./src/actors/Player.ts 237:4-36
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Player.ts(237,5)
+      TS7053: Element implicitly has an 'any' type because expression of type '"multiplayerManager"' can't be used to index type 'Scene<unknown>'.
+  Property 'multiplayerManager' does not exist on type 'Scene<unknown>'.
+ @ ./src/scenes/MainScene.ts 2:0-42 171:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Player.ts
+./src/actors/Player.ts 272:4-36
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Player.ts(272,5)
+      TS7053: Element implicitly has an 'any' type because expression of type '"multiplayerManager"' can't be used to index type 'Scene<unknown>'.
+  Property 'multiplayerManager' does not exist on type 'Scene<unknown>'.
+ @ ./src/scenes/MainScene.ts 2:0-42 171:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Player.ts
+./src/actors/Player.ts 295:4-36
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Player.ts(295,5)
+      TS7053: Element implicitly has an 'any' type because expression of type '"multiplayerManager"' can't be used to index type 'Scene<unknown>'.
+  Property 'multiplayerManager' does not exist on type 'Scene<unknown>'.
+ @ ./src/scenes/MainScene.ts 2:0-42 171:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Resource.ts
+./src/actors/Resource.ts 41:18-35
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Resource.ts(41,19)
+      TS2345: Argument of type 'Rectangle' is not assignable to parameter of type 'Entity'.
+  Type 'Rectangle' is missing the following properties from type 'Entity': _name, _setName, name, events, and 52 more.
+ @ ./src/scenes/MainScene.ts 5:0-46 214:27-35
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Resource.ts
+./src/actors/Resource.ts 42:18-33
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Resource.ts(42,19)
+      TS2345: Argument of type 'Rectangle' is not assignable to parameter of type 'Entity'.
+  Type 'Rectangle' is missing the following properties from type 'Entity': _name, _setName, name, events, and 52 more.
+ @ ./src/scenes/MainScene.ts 5:0-46 214:27-35
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Resource.ts
+./src/actors/Resource.ts 94:4-36
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Resource.ts(94,5)
+      TS7053: Element implicitly has an 'any' type because expression of type '"multiplayerManager"' can't be used to index type 'Scene<unknown>'.
+  Property 'multiplayerManager' does not exist on type 'Scene<unknown>'.
+ @ ./src/scenes/MainScene.ts 5:0-46 214:27-35
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Resource.ts
+./src/actors/Resource.ts 106:4-36
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Resource.ts(106,5)
+      TS7053: Element implicitly has an 'any' type because expression of type '"multiplayerManager"' can't be used to index type 'Scene<unknown>'.
+  Property 'multiplayerManager' does not exist on type 'Scene<unknown>'.
+ @ ./src/scenes/MainScene.ts 5:0-46 214:27-35
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Resource.ts
+./src/actors/Resource.ts 144:4-36
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Resource.ts(144,5)
+      TS7053: Element implicitly has an 'any' type because expression of type '"multiplayerManager"' can't be used to index type 'Scene<unknown>'.
+  Property 'multiplayerManager' does not exist on type 'Scene<unknown>'.
+ @ ./src/scenes/MainScene.ts 5:0-46 214:27-35
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts
+./src/actors/Zombie.ts 9:10-15
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts(9,11)
+      TS2564: Property 'speed' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/scenes/MainScene.ts 3:0-42 188:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts
+./src/actors/Zombie.ts 10:10-16
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts(10,11)
+      TS2564: Property 'damage' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/scenes/MainScene.ts 3:0-42 188:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts
+./src/actors/Zombie.ts 37:18-32
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts(37,19)
+      TS2345: Argument of type 'Rectangle' is not assignable to parameter of type 'Entity'.
+  Type 'Rectangle' is missing the following properties from type 'Entity': _name, _setName, name, events, and 52 more.
+ @ ./src/scenes/MainScene.ts 3:0-42 188:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts
+./src/actors/Zombie.ts 108:20-41
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts(108,21)
+      TS7053: Element implicitly has an 'any' type because expression of type '"players"' can't be used to index type 'Scene<unknown>'.
+  Property 'players' does not exist on type 'Scene<unknown>'.
+ @ ./src/scenes/MainScene.ts 3:0-42 188:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts
+./src/actors/Zombie.ts 109:20-36
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts(109,21)
+      TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+ @ ./src/scenes/MainScene.ts 3:0-42 188:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts
+./src/actors/Zombie.ts 110:32-48
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts(110,33)
+      TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+ @ ./src/scenes/MainScene.ts 3:0-42 188:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts
+./src/actors/Zombie.ts 115:24-47
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts(115,25)
+      TS7053: Element implicitly has an 'any' type because expression of type '"buildings"' can't be used to index type 'Scene<unknown>'.
+  Property 'buildings' does not exist on type 'Scene<unknown>'.
+ @ ./src/scenes/MainScene.ts 3:0-42 188:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts
+./src/actors/Zombie.ts 116:24-40
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts(116,25)
+      TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+ @ ./src/scenes/MainScene.ts 3:0-42 188:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts
+./src/actors/Zombie.ts 117:36-52
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts(117,37)
+      TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+ @ ./src/scenes/MainScene.ts 3:0-42 188:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts
+./src/actors/Zombie.ts 146:4-36
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts(146,5)
+      TS7053: Element implicitly has an 'any' type because expression of type '"multiplayerManager"' can't be used to index type 'Scene<unknown>'.
+  Property 'multiplayerManager' does not exist on type 'Scene<unknown>'.
+ @ ./src/scenes/MainScene.ts 3:0-42 188:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts
+./src/actors/Zombie.ts 181:4-36
+[tsl] ERROR in /home/Zombie-defense/client/src/actors/Zombie.ts(181,5)
+      TS7053: Element implicitly has an 'any' type because expression of type '"multiplayerManager"' can't be used to index type 'Scene<unknown>'.
+  Property 'multiplayerManager' does not exist on type 'Scene<unknown>'.
+ @ ./src/scenes/MainScene.ts 3:0-42 188:25-31
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/LobbyScene.ts
+./src/scenes/LobbyScene.ts 7:10-20
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/LobbyScene.ts(7,11)
+      TS2564: Property 'joinButton' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/index.ts 3:0-49 19:27-37
+
+ERROR in /home/Zombie-defense/client/src/scenes/LobbyScene.ts
+./src/scenes/LobbyScene.ts 8:10-21
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/LobbyScene.ts(8,11)
+      TS2564: Property 'playersList' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/index.ts 3:0-49 19:27-37
+
+ERROR in /home/Zombie-defense/client/src/scenes/LobbyScene.ts
+./src/scenes/LobbyScene.ts 9:10-20
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/LobbyScene.ts(9,11)
+      TS2564: Property 'titleLabel' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/index.ts 3:0-49 19:27-37
+
+ERROR in /home/Zombie-defense/client/src/scenes/LobbyScene.ts
+./src/scenes/LobbyScene.ts 10:10-20
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/LobbyScene.ts(10,11)
+      TS2564: Property 'background' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/index.ts 3:0-49 19:27-37
+
+ERROR in /home/Zombie-defense/client/src/scenes/LobbyScene.ts
+./src/scenes/LobbyScene.ts 11:10-19
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/LobbyScene.ts(11,11)
+      TS2564: Property 'nameLabel' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/index.ts 3:0-49 19:27-37
+
+ERROR in /home/Zombie-defense/client/src/scenes/LobbyScene.ts
+./src/scenes/LobbyScene.ts 26:13-28
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/LobbyScene.ts(26,14)
+      TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type 'Rectangle' is not assignable to parameter of type 'ScreenElement'.
+      Type 'Rectangle' is missing the following properties from type 'ScreenElement': _engine, _initialize, contains, body, and 92 more.
+ @ ./src/index.ts 3:0-49 19:27-37
+
+ERROR in /home/Zombie-defense/client/src/scenes/LobbyScene.ts
+./src/scenes/LobbyScene.ts 116:48-55
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/LobbyScene.ts(116,49)
+      TS2345: Argument of type 'ex.Input.Keys' is not assignable to parameter of type 'number'.
+ @ ./src/index.ts 3:0-49 19:27-37
+
+ERROR in /home/Zombie-defense/client/src/scenes/LobbyScene.ts
+./src/scenes/LobbyScene.ts 118:49-56
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/LobbyScene.ts(118,50)
+      TS2345: Argument of type 'ex.Input.Keys' is not assignable to parameter of type 'number'.
+ @ ./src/index.ts 3:0-49 19:27-37
+
+ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts
+./src/scenes/MainScene.ts 12:13-22
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts(12,14)
+      TS2415: Class 'MainScene' incorrectly extends base class 'Scene<unknown>'.
+  Property 'camera' is private in type 'MainScene' but not in type 'Scene<unknown>'.
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts
+./src/scenes/MainScene.ts 19:10-13
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts(19,11)
+      TS2564: Property 'hud' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts
+./src/scenes/MainScene.ts 20:10-19
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts(20,11)
+      TS2564: Property 'buildMenu' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts
+./src/scenes/MainScene.ts 21:10-23
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts(21,11)
+      TS2564: Property 'localPlayerId' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts
+./src/scenes/MainScene.ts 23:10-16
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts(23,11)
+      TS2564: Property 'camera' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts
+./src/scenes/MainScene.ts 24:10-13
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts(24,11)
+      TS2564: Property 'map' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts
+./src/scenes/MainScene.ts 52:19-26
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts(52,20)
+      TS2339: Property 'visible' does not exist on type 'BuildMenu'.
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts
+./src/scenes/MainScene.ts 157:17-24
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts(157,18)
+      TS2551: Property 'pointer' does not exist on type 'EngineInput'. Did you mean 'pointers'?
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts
+./src/scenes/MainScene.ts 157:37-40
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts(157,38)
+      TS7006: Parameter 'evt' implicitly has an 'any' type.
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts
+./src/scenes/MainScene.ts 271:19-26
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts(271,20)
+      TS2339: Property 'visible' does not exist on type 'BuildMenu'.
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts
+./src/scenes/MainScene.ts 280:34-41
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts(280,35)
+      TS2551: Property 'pointer' does not exist on type 'EngineInput'. Did you mean 'pointers'?
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts
+./src/scenes/MainScene.ts 281:33-52
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/MainScene.ts(281,34)
+      TS2339: Property 'screenToWorldCoords' does not exist on type 'Camera'.
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/ShopScene.ts
+./src/scenes/ShopScene.ts 9:10-19
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/ShopScene.ts(9,11)
+      TS2564: Property 'goldLabel' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/index.ts 4:0-47 21:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/ShopScene.ts
+./src/scenes/ShopScene.ts 10:10-20
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/ShopScene.ts(10,11)
+      TS2564: Property 'titleLabel' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/index.ts 4:0-47 21:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/ShopScene.ts
+./src/scenes/ShopScene.ts 11:10-20
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/ShopScene.ts(11,11)
+      TS2564: Property 'background' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/index.ts 4:0-47 21:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/ShopScene.ts
+./src/scenes/ShopScene.ts 12:10-19
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/ShopScene.ts(12,11)
+      TS2564: Property 'timeLabel' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/index.ts 4:0-47 21:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/ShopScene.ts
+./src/scenes/ShopScene.ts 14:10-19
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/ShopScene.ts(14,11)
+      TS2564: Property 'shopTimer' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/index.ts 4:0-47 21:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/ShopScene.ts
+./src/scenes/ShopScene.ts 29:13-28
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/ShopScene.ts(29,14)
+      TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type 'Rectangle' is not assignable to parameter of type 'ScreenElement'.
+      Type 'Rectangle' is missing the following properties from type 'ScreenElement': _engine, _initialize, contains, body, and 92 more.
+ @ ./src/index.ts 4:0-47 21:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/ShopScene.ts
+./src/scenes/ShopScene.ts 195:24-31
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/ShopScene.ts(195,25)
+      TS2339: Property 'TopLeft' does not exist on type 'typeof Vector'.
+ @ ./src/index.ts 4:0-47 21:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/ShopScene.ts
+./src/scenes/ShopScene.ts 207:6-17
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/ShopScene.ts(207,7)
+      TS2353: Object literal may only specify known properties, and 'borderColor' does not exist in type 'RasterOptions & RectangleOptions'.
+ @ ./src/index.ts 4:0-47 21:26-35
+
+ERROR in /home/Zombie-defense/client/src/scenes/ShopScene.ts
+./src/scenes/ShopScene.ts 211:18-28
+[tsl] ERROR in /home/Zombie-defense/client/src/scenes/ShopScene.ts(211,19)
+      TS2345: Argument of type 'Rectangle' is not assignable to parameter of type 'Entity'.
+  Type 'Rectangle' is missing the following properties from type 'Entity': _name, _setName, name, events, and 52 more.
+ @ ./src/index.ts 4:0-47 21:26-35
+
+ERROR in /home/Zombie-defense/client/src/ui/BuildMenu.ts
+./src/ui/BuildMenu.ts 10:10-20
+[tsl] ERROR in /home/Zombie-defense/client/src/ui/BuildMenu.ts(10,11)
+      TS2564: Property 'background' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/scenes/MainScene.ts 7:0-44 35:29-38
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/ui/BuildMenu.ts
+./src/ui/BuildMenu.ts 11:10-20
+[tsl] ERROR in /home/Zombie-defense/client/src/ui/BuildMenu.ts(11,11)
+      TS2564: Property 'titleLabel' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/scenes/MainScene.ts 7:0-44 35:29-38
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/ui/BuildMenu.ts
+./src/ui/BuildMenu.ts 36:6-17
+[tsl] ERROR in /home/Zombie-defense/client/src/ui/BuildMenu.ts(36,7)
+      TS2353: Object literal may only specify known properties, and 'borderColor' does not exist in type 'RasterOptions & RectangleOptions'.
+ @ ./src/scenes/MainScene.ts 7:0-44 35:29-38
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/ui/BuildMenu.ts
+./src/ui/BuildMenu.ts 40:18-33
+[tsl] ERROR in /home/Zombie-defense/client/src/ui/BuildMenu.ts(40,19)
+      TS2345: Argument of type 'Rectangle' is not assignable to parameter of type 'Entity'.
+  Type 'Rectangle' is missing the following properties from type 'Entity': _name, _setName, name, events, and 52 more.
+ @ ./src/scenes/MainScene.ts 7:0-44 35:29-38
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/ui/BuildMenu.ts
+./src/ui/BuildMenu.ts 77:8-19
+[tsl] ERROR in /home/Zombie-defense/client/src/ui/BuildMenu.ts(77,9)
+      TS2353: Object literal may only specify known properties, and 'borderColor' does not exist in type 'ActorArgs'.
+ @ ./src/scenes/MainScene.ts 7:0-44 35:29-38
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/ui/BuildMenu.ts
+./src/ui/BuildMenu.ts 95:36-48
+[tsl] ERROR in /home/Zombie-defense/client/src/ui/BuildMenu.ts(95,37)
+      TS7015: Element implicitly has an 'any' type because index expression is not of type 'number'.
+ @ ./src/scenes/MainScene.ts 7:0-44 35:29-38
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/ui/HUD.ts
+./src/ui/HUD.ts 6:10-19
+[tsl] ERROR in /home/Zombie-defense/client/src/ui/HUD.ts(6,11)
+      TS2564: Property 'waveLabel' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/scenes/MainScene.ts 6:0-32 32:23-26
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/ui/HUD.ts
+./src/ui/HUD.ts 7:10-19
+[tsl] ERROR in /home/Zombie-defense/client/src/ui/HUD.ts(7,11)
+      TS2564: Property 'timeLabel' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/scenes/MainScene.ts 6:0-32 32:23-26
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/ui/HUD.ts
+./src/ui/HUD.ts 8:10-21
+[tsl] ERROR in /home/Zombie-defense/client/src/ui/HUD.ts(8,11)
+      TS2564: Property 'healthLabel' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/scenes/MainScene.ts 6:0-32 32:23-26
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/ui/HUD.ts
+./src/ui/HUD.ts 9:10-22
+[tsl] ERROR in /home/Zombie-defense/client/src/ui/HUD.ts(9,11)
+      TS2564: Property 'staminaLabel' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/scenes/MainScene.ts 6:0-32 32:23-26
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/ui/HUD.ts
+./src/ui/HUD.ts 11:10-19
+[tsl] ERROR in /home/Zombie-defense/client/src/ui/HUD.ts(11,11)
+      TS2564: Property 'goldLabel' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/scenes/MainScene.ts 6:0-32 32:23-26
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/ui/HUD.ts
+./src/ui/HUD.ts 13:10-32
+[tsl] ERROR in /home/Zombie-defense/client/src/ui/HUD.ts(13,11)
+      TS2564: Property 'currentWeaponIndicator' has no initializer and is not definitely assigned in the constructor.
+ @ ./src/scenes/MainScene.ts 6:0-32 32:23-26
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/ui/HUD.ts
+./src/ui/HUD.ts 94:63-68
+[tsl] ERROR in /home/Zombie-defense/client/src/ui/HUD.ts(94,64)
+      TS2339: Property 'Brown' does not exist on type 'typeof Color'.
+ @ ./src/scenes/MainScene.ts 6:0-32 32:23-26
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/ui/HUD.ts
+./src/ui/HUD.ts 166:6-17
+[tsl] ERROR in /home/Zombie-defense/client/src/ui/HUD.ts(166,7)
+      TS2353: Object literal may only specify known properties, and 'borderColor' does not exist in type 'RasterOptions & RectangleOptions'.
+ @ ./src/scenes/MainScene.ts 6:0-32 32:23-26
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/ui/HUD.ts
+./src/ui/HUD.ts 170:18-45
+[tsl] ERROR in /home/Zombie-defense/client/src/ui/HUD.ts(170,19)
+      TS2345: Argument of type 'Rectangle' is not assignable to parameter of type 'Entity'.
+  Type 'Rectangle' is missing the following properties from type 'Entity': _name, _setName, name, events, and 52 more.
+ @ ./src/scenes/MainScene.ts 6:0-32 32:23-26
+ @ ./src/index.ts 2:0-47 20:26-35
+
+ERROR in /home/Zombie-defense/client/src/ui/HUD.ts
+./src/ui/HUD.ts 218:34-37
+[tsl] ERROR in /home/Zombie-defense/client/src/ui/HUD.ts(218,35)
+      TS2339: Property 'pos' does not exist on type 'Rectangle'.
+ @ ./src/scenes/MainScene.ts 6:0-32 32:23-26
+ @ ./src/index.ts 2:0-47 20:26-35
+
+78 errors have detailed information that is not shown.
+Use 'stats.errorDetails: true' resp. '--stats-error-details' to show it.
+
+webpack 5.102.1 compiled with 78 errors in 19587 ms

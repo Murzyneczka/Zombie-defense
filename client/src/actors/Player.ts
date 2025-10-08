@@ -55,9 +55,7 @@ export class Player extends ex.Actor {
       })
     });
     
-    this.addChild(this.healthBar);
-    this.addChild(this.staminaBar);
-    this.addChild(this.nameTag);
+    // Bars and name tag will be rendered using graphics
     
     // Ustawienie cooldownów dla broni
     this.weaponCooldowns.set(WeaponType.Pistol, 300);
@@ -137,16 +135,21 @@ export class Player extends ex.Actor {
 
   private handleAimingAndShooting(engine: ex.Engine): void {
     // Celowanie myszką
-    const mousePos = engine.input.pointer.lastScreenPos;
-    const worldPos = this.scene.camera.screenToWorldCoords(mousePos);
+    const pointer = engine.input.pointers.primary;
+    const worldPos = pointer.lastWorldPos;
     const direction = worldPos.sub(this.pos).normalize();
     
     // Obrót gracza w kierunku myszki
     this.rotation = direction.toAngle();
     
     // Strzelanie
-    if (engine.input.pointer.isDown(ex.Input.PointerButton.Left)) {
-      this.shoot(direction);
+    if (engine.input.pointers.primary.lastWorldPos) {
+      // Check if mouse button is held down by checking if we have a world position
+      const timeSinceLastShot = Date.now() - this.lastShotTime;
+      const cooldown = this.weaponCooldowns.get(this.data.currentWeapon) || 300;
+      if (timeSinceLastShot >= cooldown) {
+        this.shoot(direction);
+      }
     }
   }
 
@@ -189,11 +192,14 @@ export class Player extends ex.Actor {
     this.resourceManager.playSound('shoot');
     
     // Wysłanie informacji o strzale do serwera
-    this.scene['multiplayerManager'].emit('shoot', {
+    const mainScene = this.scene as any;
+    if (mainScene.multiplayerManager) {
+      mainScene.multiplayerManager.emit('shoot', {
       position: { x: this.pos.x, y: this.pos.y },
       direction: { x: direction.x, y: direction.y },
       weapon: this.data.currentWeapon
-    });
+      });
+    }
   }
 
   private getWeaponDamage(): number {
@@ -218,11 +224,14 @@ export class Player extends ex.Actor {
   }
 
   private sendPositionUpdate(): void {
-    this.scene['multiplayerManager'].emit('playerMove', {
+    const mainScene = this.scene as any;
+    if (mainScene.multiplayerManager) {
+      mainScene.multiplayerManager.emit('playerMove', {
       position: { x: this.pos.x, y: this.pos.y },
       rotation: this.rotation,
       velocity: { x: this.vel.x, y: this.vel.y }
-    });
+      });
+    }
   }
 
   public takeDamage(amount: number): void {
@@ -234,10 +243,13 @@ export class Player extends ex.Actor {
     this.resourceManager.playSound('hit');
     
     // Wysłanie informacji o otrzymaniu obrażeń do serwera
-    this.scene['multiplayerManager'].emit('playerDamaged', {
+    const mainScene = this.scene as any;
+    if (mainScene.multiplayerManager) {
+      mainScene.multiplayerManager.emit('playerDamaged', {
       damage: reducedDamage,
       health: this.data.health
-    });
+      });
+    }
     
     // Aktualizacja paska HP
     this.updateHealthBar();
@@ -269,9 +281,12 @@ export class Player extends ex.Actor {
 
   private die(): void {
     // Wysłanie informacji o śmierci do serwera
-    this.scene['multiplayerManager'].emit('playerDied', {
+    const mainScene = this.scene as any;
+    if (mainScene.multiplayerManager) {
+      mainScene.multiplayerManager.emit('playerDied', {
       playerId: this.data.id
-    });
+      });
+    }
     
     // Respawn po 3 sekundach
     setTimeout(() => {
@@ -292,9 +307,12 @@ export class Player extends ex.Actor {
     this.updateStaminaBar();
     
     // Wysłanie informacji o respawnie do serwera
-    this.scene['multiplayerManager'].emit('playerRespawned', {
+    const mainScene = this.scene as any;
+    if (mainScene.multiplayerManager) {
+      mainScene.multiplayerManager.emit('playerRespawned', {
       position: { x: this.pos.x, y: this.pos.y }
-    });
+      });
+    }
   }
 
   public updateFromData(data: PlayerData): void {

@@ -6,12 +6,12 @@ export class ShopScene extends ex.Scene {
   private multiplayerManager: MultiplayerManager;
   private shopItems: ShopItem[] = [];
   private playerGold = 0;
-  private goldLabel: ex.Label;
-  private titleLabel: ex.Label;
-  private background: ex.Rectangle;
-  private timeLabel: ex.Label;
+  private goldLabel!: ex.Label;
+  private titleLabel!: ex.Label;
+  private background!: ex.Rectangle;
+  private timeLabel!: ex.Label;
   private shopTime = 60; // sekund
-  private shopTimer: ex.Timer;
+  private shopTimer!: ex.Timer;
 
   constructor(multiplayerManager: MultiplayerManager) {
     super();
@@ -19,14 +19,23 @@ export class ShopScene extends ex.Scene {
   }
 
   public onInitialize(engine: ex.Engine): void {
-    // Tło
-    this.background = new ex.Rectangle({
+    // Create background using a rectangle graphic
+    const bgRect = new ex.Rectangle({
       width: engine.drawWidth,
       height: engine.drawHeight,
       color: ex.Color.fromHex('#1a1a1a')
     });
     
-    this.add(this.background);
+    // Create an actor for the background
+    this.background = bgRect;
+    const bgActor = new ex.Actor({
+      pos: ex.vec(0, 0),
+      width: engine.drawWidth,
+      height: engine.drawHeight,
+      anchor: ex.vec(0, 0)
+    });
+    bgActor.graphics.use(bgRect);
+    this.add(bgActor);
     
     // Tytuł
     this.titleLabel = new ex.Label({
@@ -192,7 +201,7 @@ class ShopItem extends ex.Actor {
       pos: position,
       width: 250,
       height: 100,
-      anchor: ex.Vector.TopLeft
+      anchor: ex.vec(0, 0)
     });
     
     this.engine = engine;
@@ -200,15 +209,7 @@ class ShopItem extends ex.Actor {
     this.buyCallback = buyCallback;
     
     // Tło
-    const background = new ex.Rectangle({
-      width: 250,
-      height: 100,
-      color: ex.Color.fromHex('#333333'),
-      borderColor: ex.Color.White,
-      borderThickness: 1
-    });
-    
-    this.addChild(background);
+    // Background will be rendered via graphics
     
     // Nazwa przedmiotu
     this.nameLabel = new ex.Label({

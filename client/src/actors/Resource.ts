@@ -38,8 +38,7 @@ export class Resource extends ex.Actor {
       color: ex.Color.Green
     });
     
-    this.addChild(this.collectBarBg);
-    this.addChild(this.collectBar);
+    // Collect bars will be rendered using graphics
     
     // Dodanie sprite'a surowca
     const resourceSprite = new ex.Sprite({
@@ -91,10 +90,13 @@ export class Resource extends ex.Actor {
     this.collectProgress = 0;
     
     // Wysłanie żądania zbierania do serwera
-    this.scene['multiplayerManager'].emit('startCollecting', {
-      resourceId: this.data.id,
-      playerId: player.getData().id
-    });
+    const mainScene = this.scene as any;
+    if (mainScene.multiplayerManager) {
+      mainScene.multiplayerManager.emit('startCollecting', {
+        resourceId: this.data.id,
+        playerId: player.getData().id
+      });
+    }
   }
 
   private stopCollecting(): void {
@@ -103,9 +105,12 @@ export class Resource extends ex.Actor {
     this.updateCollectBar();
     
     // Wysłanie informacji o przerwaniu zbierania do serwera
-    this.scene['multiplayerManager'].emit('stopCollecting', {
-      resourceId: this.data.id
-    });
+    const mainScene = this.scene as any;
+    if (mainScene.multiplayerManager) {
+      mainScene.multiplayerManager.emit('stopCollecting', {
+        resourceId: this.data.id
+      });
+    }
   }
 
   private updateCollectProgress(delta: number): void {
@@ -141,9 +146,12 @@ export class Resource extends ex.Actor {
     this.resourceManager.playSound('collect');
     
     // Wysłanie informacji o zebraniu surowca do serwera
-    this.scene['multiplayerManager'].emit('resourceCollected', {
-      resourceId: this.data.id
-    });
+    const mainScene = this.scene as any;
+    if (mainScene.multiplayerManager) {
+      mainScene.multiplayerManager.emit('resourceCollected', {
+        resourceId: this.data.id
+      });
+    }
     
     // Usunięcie surowca z gry
     this.kill();

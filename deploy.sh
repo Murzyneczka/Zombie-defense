@@ -11,6 +11,10 @@ BLUE='\033[0;34m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
+# Pliki logów błędów
+CLIENT_BUILD_LOG="../client_build.log"
+SERVER_ERROR_LOG="../server_build_errors.log"
+
 # 1. Instalacja zależności klienta
 echo -e "${BLUE}📦 Instalacja zależności klienta...${NC}"
 cd client
@@ -22,9 +26,10 @@ fi
 
 # 2. Budowanie klienta
 echo -e "${BLUE}🔨 Budowanie klienta...${NC}"
-npm run build
+npm run build > "$CLIENT_BUILD_LOG" 2>&1
 if [ $? -ne 0 ]; then
-    echo -e "${RED}❌ Błąd budowania klienta${NC}"
+    echo -e "${RED}❌ Błąd budowania klienta. Sprawdź logi w $CLIENT_BUILD_LOG${NC}"
+    cat "$CLIENT_BUILD_LOG" | grep -i "error" # Wyświetla linie z błędami w konsoli
     exit 1
 fi
 
@@ -39,9 +44,9 @@ fi
 
 # 4. Budowanie serwera
 echo -e "${BLUE}🔨 Budowanie serwera...${NC}"
-npm run build
+npm run build 2> "$SERVER_ERROR_LOG"
 if [ $? -ne 0 ]; then
-    echo -e "${RED}❌ Błąd budowania serwera${NC}"
+    echo -e "${RED}❌ Błąd budowania serwera. Sprawdź logi w $SERVER_ERROR_LOG${NC}"
     exit 1
 fi
 

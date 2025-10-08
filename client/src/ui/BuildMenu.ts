@@ -7,8 +7,8 @@ export class BuildMenu extends ex.Actor {
   private resourceManager: ResourceManager;
   private selectedBuildingType: BuildingType | null = null;
   private buildingButtons: ex.Actor[] = [];
-  private background: ex.Rectangle;
-  private titleLabel: ex.Label;
+  private background!: ex.Rectangle;
+  private titleLabel!: ex.Label;
 
   constructor(engine: ex.Engine, resourceManager: ResourceManager) {
     super({
@@ -26,6 +26,9 @@ export class BuildMenu extends ex.Actor {
     this.createBackground();
     this.createTitle();
     this.createBuildingButtons();
+    
+    // Hide by default
+    this.graphics.visible = false;
   }
 
   private createBackground(): void {
@@ -33,11 +36,11 @@ export class BuildMenu extends ex.Actor {
       width: 600,
       height: 400,
       color: ex.Color.fromHex('#333333'),
-      borderColor: ex.Color.White,
-      borderThickness: 2
+      strokeColor: ex.Color.White,
+      lineWidth: 2
     });
     
-    this.addChild(this.background);
+    // Background rendered via graphics API
   }
 
   private createTitle(): void {
@@ -73,9 +76,7 @@ export class BuildMenu extends ex.Actor {
         pos: ex.vec(-180 + col * 180, -100 + row * 100),
         width: 160,
         height: 80,
-        color: ex.Color.fromHex('#555555'),
-        borderColor: ex.Color.White,
-        borderThickness: 1
+        color: ex.Color.fromHex('#555555')
       });
       
       // Dodanie nazwy budynku
@@ -92,7 +93,8 @@ export class BuildMenu extends ex.Actor {
       // Dodanie kosztu
       let costText = 'Koszt: ';
       Object.entries(building.cost).forEach(([resourceType, amount]) => {
-        costText += `${ResourceType[resourceType]}: ${amount} `;
+        const typeNum = parseInt(resourceType);
+        costText += `${ResourceType[typeNum]}: ${amount} `;
       });
       
       const costLabel = new ex.Label({

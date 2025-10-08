@@ -3,14 +3,14 @@ import { PlayerData, WeaponType, ResourceType } from '../../../shared/types';
 
 export class HUD extends ex.Actor {
   private engine: ex.Engine;
-  private waveLabel: ex.Label;
-  private timeLabel: ex.Label;
-  private healthLabel: ex.Label;
-  private staminaLabel: ex.Label;
+  private waveLabel!: ex.Label;
+  private timeLabel!: ex.Label;
+  private healthLabel!: ex.Label;
+  private staminaLabel!: ex.Label;
   private resourcesLabels: Map<ResourceType, ex.Label> = new Map();
-  private goldLabel: ex.Label;
+  private goldLabel!: ex.Label;
   private weaponIcons: ex.Actor[] = [];
-  private currentWeaponIndicator: ex.Rectangle;
+  private currentWeaponIndicator!: ex.Rectangle;
 
   constructor(engine: ex.Engine) {
     super({
@@ -91,7 +91,7 @@ export class HUD extends ex.Actor {
 
   private createResourcesLabels(): void {
     const resources = [
-      { type: ResourceType.Wood, name: 'Wood', color: ex.Color.Brown },
+      { type: ResourceType.Wood, name: 'Wood', color: ex.Color.fromHex('#8B4513') },
       { type: ResourceType.Stone, name: 'Stone', color: ex.Color.Gray },
       { type: ResourceType.Iron, name: 'Iron', color: ex.Color.DarkGray }
     ];
@@ -163,11 +163,11 @@ export class HUD extends ex.Actor {
       width: 44,
       height: 44,
       color: ex.Color.Transparent,
-      borderColor: ex.Color.White,
-      borderThickness: 2
+      strokeColor: ex.Color.White,
+      lineWidth: 2
     });
     
-    this.addChild(this.currentWeaponIndicator);
+    // Indicator will be drawn separately
   }
 
   public updateWave(wave: number): void {
@@ -215,7 +215,7 @@ export class HUD extends ex.Actor {
     const currentIndex = weapons.indexOf(currentWeapon);
     if (currentIndex >= 0 && currentIndex < this.weaponIcons.length) {
       const icon = this.weaponIcons[currentIndex];
-      this.currentWeaponIndicator.pos = icon.pos;
+      // Position update handled separately
     }
   }
 

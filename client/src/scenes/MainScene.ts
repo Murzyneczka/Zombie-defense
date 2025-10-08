@@ -16,12 +16,11 @@ export class MainScene extends ex.Scene {
   private zombies: Map<string, Zombie> = new Map();
   private buildings: Map<string, Building> = new Map();
   private resources: Map<string, Resource> = new Map();
-  private hud: HUD;
-  private buildMenu: BuildMenu;
-  private localPlayerId: string;
+  public hud!: HUD;
+  public buildMenu!: BuildMenu;
+  public localPlayerId!: string;
   private gameState: GameState;
-  private camera: ex.Camera;
-  private map: ex.TileMap;
+  public map!: ex.TileMap;
   private isBuildMenuOpen = false;
 
   constructor(multiplayerManager: MultiplayerManager, resourceManager: ResourceManager) {
@@ -49,7 +48,6 @@ export class MainScene extends ex.Scene {
     
     // Inicjalizacja menu budowania
     this.buildMenu = new BuildMenu(engine, this.resourceManager);
-    this.buildMenu.visible = false;
     this.add(this.buildMenu);
     
     // Nasłuchiwanie na zdarzenia multiplayer
@@ -154,8 +152,8 @@ export class MainScene extends ex.Scene {
     });
     
     // Obsługa myszy
-    engine.input.pointer.on('down', (evt) => {
-      if (this.isBuildMenuOpen && evt.button === ex.Input.PointerButton.Left) {
+    engine.input.pointers.primary.on('down', (evt) => {
+      if (this.isBuildMenuOpen) {
         this.handleBuildPlacement(engine);
       }
     });
@@ -268,7 +266,12 @@ export class MainScene extends ex.Scene {
 
   private toggleBuildMenu(): void {
     this.isBuildMenuOpen = !this.isBuildMenuOpen;
-    this.buildMenu.visible = this.isBuildMenuOpen;
+    // Toggle graphics visibility instead of actor visibility
+    if (this.isBuildMenuOpen) {
+      this.buildMenu.graphics.visible = true;
+    } else {
+      this.buildMenu.graphics.visible = false;
+    }
   }
 
   private handleBuildPlacement(engine: ex.Engine): void {
@@ -277,8 +280,8 @@ export class MainScene extends ex.Scene {
     const selectedBuildingType = this.buildMenu.getSelectedBuildingType();
     if (!selectedBuildingType) return;
     
-    const mousePos = engine.input.pointer.lastScreenPos;
-    const worldPos = this.camera.screenToWorldCoords(mousePos);
+    const pointer = engine.input.pointers.primary;
+    const worldPos = pointer.lastWorldPos;
     
     // Wysłanie żądania budowania do serwera
     this.multiplayerManager.emit('buildRequest', {
