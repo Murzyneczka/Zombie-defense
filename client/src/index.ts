@@ -23,17 +23,6 @@ game.addScene('lobby', new LobbyScene(multiplayerManager));
 game.addScene('main', new MainScene(multiplayerManager, resourceManager));
 game.addScene('shop', new ShopScene(multiplayerManager));
 
-// Rozpoczęcie gry od sceny lobby
-game.goToScene('lobby');
-
-// Ukrycie ekranu ładowania
-window.addEventListener('load', () => {
-  const loadingElement = document.getElementById('loading');
-  if (loadingElement) {
-    loadingElement.style.display = 'none';
-  }
-});
-
 // Obsługa błędów
 game.on('initialize', () => {
   console.log('Gra zainicjalizowana');
@@ -43,7 +32,16 @@ game.on('start', () => {
   console.log('Gra rozpoczęta');
 });
 
-// Uruchomienie silnika gry
-game.start().catch(err => {
+// Uruchomienie silnika gry, a następnie przejście do sceny lobby
+game.start().then(() => {
+  console.log('Silnik uruchomiony, przechodzę do lobby');
+  game.goToScene('lobby');
+  
+  // Ukrycie ekranu ładowania
+  const loadingElement = document.getElementById('loading');
+  if (loadingElement) {
+    loadingElement.style.display = 'none';
+  }
+}).catch(err => {
   console.error('Błąd uruchomienia gry:', err);
 });

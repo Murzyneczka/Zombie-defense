@@ -71,6 +71,9 @@ export class LobbyScene extends ex.Scene {
       anchor: ex.Vector.Half
     });
     
+    // Włączenie obsługi wskaźnika dla przycisku
+    this.joinButton.pointer.useGraphicsBounds = true;
+    
     const joinLabel = new ex.Label({
       text: 'DOŁĄCZ',
       font: new ex.Font({
@@ -105,6 +108,7 @@ export class LobbyScene extends ex.Scene {
   private setupEventListeners(): void {
     // Obsługa kliknięcia przycisku dołączenia
     this.joinButton.on('pointerdown', () => {
+      console.log('Przycisk DOŁĄCZ kliknięty');
       this.joinGame(this.playerName);
     });
     
@@ -118,20 +122,41 @@ export class LobbyScene extends ex.Scene {
       this.engine.goToScene('main');
     });
     
-    // Obsługa klawiatury do zmiany nazwy gracza (opcjonalnie)
+    // Obsługa klawiatury do zmiany nazwy gracza
     this.engine.input.keyboard.on('press', (evt) => {
-      // Handle letter keys for name input
-      if (evt.key && typeof evt.key === 'string' && evt.key.length === 1) {
-        const char = evt.key.toUpperCase();
-        if (char >= 'A' && char <= 'Z') {
-          if (this.playerName === 'Gracz') {
-            this.playerName = char;
-          } else if (this.playerName.length < 15) {
-            this.playerName += char;
-          }
-          this.nameLabel.text = `Nazwa: ${this.playerName}`;
+      console.log('Klawisz naciśnięty:', evt.key);
+      
+      // Obsługa liter
+      if (evt.key >= ex.Input.Keys.A && evt.key <= ex.Input.Keys.Z) {
+        const char = ex.Input.Keys[evt.key]; // Pobierz nazwę klawisza (np. "A", "B", etc.)
+        if (this.playerName === 'Gracz') {
+          this.playerName = char;
+        } else if (this.playerName.length < 15) {
+          this.playerName += char;
         }
-      } else if (evt.key === ex.Input.Keys.Backspace && this.playerName.length > 0) {
+        this.nameLabel.text = `Nazwa: ${this.playerName}`;
+      } 
+      // Obsługa cyfr
+      else if (evt.key >= ex.Input.Keys.Num0 && evt.key <= ex.Input.Keys.Num9) {
+        const num = ex.Input.Keys[evt.key].replace('Num', '');
+        if (this.playerName === 'Gracz') {
+          this.playerName = num;
+        } else if (this.playerName.length < 15) {
+          this.playerName += num;
+        }
+        this.nameLabel.text = `Nazwa: ${this.playerName}`;
+      }
+      // Obsługa spacji
+      else if (evt.key === ex.Input.Keys.Space) {
+        if (this.playerName === 'Gracz') {
+          this.playerName = ' ';
+        } else if (this.playerName.length < 15) {
+          this.playerName += ' ';
+        }
+        this.nameLabel.text = `Nazwa: ${this.playerName}`;
+      }
+      // Obsługa Backspace
+      else if (evt.key === ex.Input.Keys.Backspace && this.playerName.length > 0) {
         this.playerName = this.playerName.slice(0, -1);
         if (this.playerName.length === 0) {
           this.playerName = 'Gracz';
