@@ -14,11 +14,14 @@ export class GameRoom {
   private zombieAI: ZombieAI;
   private waveTimer: NodeJS.Timeout | null = null;
   private shopTimer: NodeJS.Timeout | null = null;
+  private gameLoop: NodeJS.Timeout | null = null;
   private collectingResources: Map<string, string> = new Map(); // resourceId -> playerId
+  private io: any; // Socket.io server instance
 
-  constructor(id: string) {
+  constructor(id: string, io?: any) {
     this.id = id;
     this.zombieAI = new ZombieAI();
+    this.io = io;
   }
 
   public getId(): string {
@@ -77,6 +80,9 @@ export class GameRoom {
     
     // Uruchomienie timera fali
     this.startWaveTimer();
+    
+    // Uruchomienie głównej pętli gry
+    this.startGameLoop();
   }
 
   public getPlayersList(): string[] {
@@ -355,5 +361,45 @@ export class GameRoom {
 
   private generateId(): string {
     return Math.random().toString(36).substring(2, 8);
+  }
+
+  private startGameLoop(): void {
+    // Główna pętla gry - aktualizacja co 50ms (20 razy na sekundę)
+    this.gameLoop = setInterval(() => {
+      this.updateGame();
+    }, 50);
+  }
+
+  private updateGame(): void {
+    // Aktualizacja AI zombie
+    this.zombies.forEach((zombie) => {
+      const targetId = this.zombieAI.updateZombieTarget(zombie, this.players, this.buildings);
+      if (targetId) {
+        zombie.target = targetId;
+      }
+    });
+    
+    // Wysłanie aktualizacji stanu gry do wszystkich graczy
+    if (this.io) {
+      this.io.to(this.id).emit('gameStateUpdate', this.getGameState());
+    }
+  }
+
+  public cleanup(): void {
+    // Czyszczenie timerów
+    if (this.waveTimer) {
+      clearInterval(this.waveTimer);
+      this.waveTimer = null;
+    }
+    
+    if (this.shopTimer) {
+      clearTimeout(this.shopTimer);
+      this.shopTimer = null;
+    }
+    
+    if (this.gameLoop) {
+      clearInterval(this.gameLoop);
+      this.gameLoop = null;
+    }
   }
 }

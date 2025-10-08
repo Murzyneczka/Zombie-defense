@@ -1,0 +1,21 @@
+[Unit]
+Description=Zombie Defense Game Server
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/home/user/zombie-defense/server
+ExecStart=/usr/bin/node /home/user/zombie-defense/server/dist/server.js
+Restart=on-failure
+RestartSec=10
+Environment=NODE_ENV=production
+Environment=PORT=3000
+
+# Logging
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=zombie-defense
+
+[Install]
+WantedBy=multi-user.target

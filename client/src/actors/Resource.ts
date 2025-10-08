@@ -1,6 +1,7 @@
 import * as ex from 'excalibur';
 import { ResourceData, ResourceType } from '../../../shared/types';
 import { ResourceManager } from '../managers/ResourceManager';
+import { Player } from './Player';
 
 export class Resource extends ex.Actor {
   private data: ResourceData;

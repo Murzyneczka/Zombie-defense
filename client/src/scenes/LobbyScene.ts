@@ -3,11 +3,12 @@ import { MultiplayerManager } from '../managers/MultiplayerManager';
 
 export class LobbyScene extends ex.Scene {
   private multiplayerManager: MultiplayerManager;
-  private playerNameInput: ex.Input.TextInput;
+  private playerName: string = 'Gracz';
   private joinButton: ex.Actor;
   private playersList: ex.Label;
   private titleLabel: ex.Label;
   private background: ex.Rectangle;
+  private nameLabel: ex.Label;
 
   constructor(multiplayerManager: MultiplayerManager) {
     super();
@@ -38,19 +39,19 @@ export class LobbyScene extends ex.Scene {
     
     this.add(this.titleLabel);
     
-    // Pole tekstowe na nazwę gracza
-    this.playerNameInput = new ex.Input.TextInput({
+    // Etykieta z nazwą gracza
+    this.nameLabel = new ex.Label({
+      text: `Nazwa: ${this.playerName}`,
       pos: ex.vec(engine.drawWidth / 2, 250),
       font: new ex.Font({
         family: 'Press Start 2P',
         size: 16,
         color: ex.Color.White
       }),
-      placeholder: 'Wpisz nazwę gracza',
       anchor: ex.Vector.Half
     });
     
-    this.add(this.playerNameInput);
+    this.add(this.nameLabel);
     
     // Przycisk dołączenia
     this.joinButton = new ex.Actor({
@@ -95,8 +96,7 @@ export class LobbyScene extends ex.Scene {
   private setupEventListeners(): void {
     // Obsługa kliknięcia przycisku dołączenia
     this.joinButton.on('pointerdown', () => {
-      const playerName = this.playerNameInput.value || 'Gracz';
-      this.joinGame(playerName);
+      this.joinGame(this.playerName);
     });
     
     // Nasłuchiwanie na aktualizacje listy graczy
@@ -107,6 +107,24 @@ export class LobbyScene extends ex.Scene {
     // Nasłuchiwanie na rozpoczęcie gry
     this.multiplayerManager.on('gameStart', () => {
       this.engine.goToScene('main');
+    });
+    
+    // Obsługa klawiatury do zmiany nazwy gracza (opcjonalnie)
+    this.engine.input.keyboard.on('press', (evt) => {
+      if (evt.key >= ex.Input.Keys.A && evt.key <= ex.Input.Keys.Z) {
+        if (this.playerName === 'Gracz') {
+          this.playerName = String.fromCharCode(evt.key);
+        } else if (this.playerName.length < 15) {
+          this.playerName += String.fromCharCode(evt.key);
+        }
+        this.nameLabel.text = `Nazwa: ${this.playerName}`;
+      } else if (evt.key === ex.Input.Keys.Backspace && this.playerName.length > 0) {
+        this.playerName = this.playerName.slice(0, -1);
+        if (this.playerName.length === 0) {
+          this.playerName = 'Gracz';
+        }
+        this.nameLabel.text = `Nazwa: ${this.playerName}`;
+      }
     });
   }
 
@@ -126,8 +144,11 @@ export class LobbyScene extends ex.Scene {
   }
 
   public onActivate(): void {
-    // Wysłanie żądania dołączenia do lobby
-    this.multiplayerManager.emit('joinLobby', { playerName: 'Gracz' });
+    // Reset nazwy gracza
+    this.playerName = 'Gracz';
+    if (this.nameLabel) {
+      this.nameLabel.text = `Nazwa: ${this.playerName}`;
+    }
   }
 
   public onDeactivate(): void {

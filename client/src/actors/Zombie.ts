@@ -1,6 +1,7 @@
 import * as ex from 'excalibur';
 import { ZombieData, ZombieType } from '../../../shared/types';
 import { ResourceManager } from '../managers/ResourceManager';
+import { Player } from './Player';
 
 export class Zombie extends ex.Actor {
   private data: ZombieData;

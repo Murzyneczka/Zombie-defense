@@ -52,9 +52,6 @@ export class MainScene extends ex.Scene {
     this.buildMenu.visible = false;
     this.add(this.buildMenu);
     
-    // Konfiguracja kamery
-    this.camera = this.camera;
-    
     // Nasłuchiwanie na zdarzenia multiplayer
     this.setupMultiplayerListeners();
     

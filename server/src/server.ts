@@ -1,15 +1,29 @@
 import { createServer } from 'http';
 import { Server } from 'socket.io';
+import express from 'express';
+import path from 'path';
 import { GameRoom } from './GameRoom';
 import { PlayerData, ZombieData, BuildingData, ResourceData, GameState } from '../../shared/types';
 
-// Utworzenie serwera HTTP
-const httpServer = createServer();
+// Utworzenie aplikacji Express
+const app = express();
+const httpServer = createServer(app);
+
+// Konfiguracja Socket.IO z CORS dla wszystkich origin (dla produkcji)
 const io = new Server(httpServer, {
   cors: {
-    origin: ["http://localhost:8080"],
+    origin: "*", // Akceptuj połączenia z dowolnego źródła
     methods: ["GET", "POST"]
   }
+});
+
+// Serwowanie plików statycznych klienta
+const clientPath = path.join(__dirname, '../../client/dist');
+app.use(express.static(clientPath));
+
+// Obsługa wszystkich pozostałych ścieżek - przekierowanie do index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(clientPath, 'index.html'));
 });
 
 // Mapa pokoi gier
@@ -27,7 +41,7 @@ io.on('connection', (socket) => {
     if (!gameRoom) {
       // Utworzenie nowego pokoju
       const roomId = generateRoomId();
-      gameRoom = new GameRoom(roomId);
+      gameRoom = new GameRoom(roomId, io);
       gameRooms.set(roomId, gameRoom);
     }
     
@@ -61,6 +75,7 @@ io.on('connection', (socket) => {
         
         // Jeśli pokój jest pusty, usuń go
         if (gameRoom.isEmpty()) {
+          gameRoom.cleanup();
           gameRooms.delete(roomId);
         } else {
           // Powiadomienie pozostałych graczy
@@ -188,6 +203,7 @@ io.on('connection', (socket) => {
         
         // Jeśli pokój jest pusty, usuń go
         if (gameRoom.isEmpty()) {
+          gameRoom.cleanup();
           gameRooms.delete(roomId);
         } else {
           // Powiadomienie pozostałych graczy
